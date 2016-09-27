@@ -8,6 +8,12 @@ shared_examples_for 'JSON API invalid request' do
           expect(error['title']).to eq('Invalid field')
           expect(error['code']).to eq('112')
         end
+        it 'renders a 400 response' do
+          get :index, include: 'foobar'
+          expect(response).to have_http_status :bad_request
+          expect(error['title']).to eq('Invalid field')
+          expect(error['code']).to eq('112')
+        end
       end
     end
 
